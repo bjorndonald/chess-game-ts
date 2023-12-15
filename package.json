@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "dev": "tsc --watch && webpack --watch"
+        "build": "tsc && webpack && npx tailwindcss -i ./styles/style.css -o ./dist/output.css"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.16",
