@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="./output.css" rel="stylesheet" />
+
+    <style type="text/tailwindcss"></style>
+  </head>
+  <body>
+    <div
+      id="chess"
+      class="w-[640px] h-[640px] m-auto rounded-lg bg-board p-3 vstack items-end"
+    >
+      <div class="hstack justify-end w-full gap-3">
+        <div class="grid grid-rows-[repeat(8,_72px)] gap-0">
+          <div class="w-6 center">8</div>
+          <div class="w-6 center">7</div>
+          <div class="w-6 center">6</div>
+          <div class="w-6 center">5</div>
+          <div class="w-6 center">4</div>
+          <div class="w-6 center">3</div>
+          <div class="w-6 center">2</div>
+          <div class="w-6 center">1</div>
+        </div>
+        <div
+          id="board"
+          class="grid grid-rows-[repeat(8,_72px)] [&_.grid]:odd:bg-dark [&_.grid]:even:bg-light gap-0"
+        >
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+          <div class="grid row shrink-0 grid-cols-[repeat(8,_68.5px)] w-full">
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+            <div class="h-[72px] shrink-0 square relative center"></div>
+          </div>
+        </div>
+      </div>
+      <div class="my-3 grid grid-cols-[repeat(8,_68.5px)] gap-0">
+        <div class="h-6 center">A</div>
+        <div class="h-6 center">B</div>
+        <div class="h-6 center">C</div>
+        <div class="h-6 center">D</div>
+        <div class="h-6 center">E</div>
+        <div class="h-6 center">F</div>
+        <div class="h-6 center">G</div>
+        <div class="h-6 center">H</div>
+      </div>
+    </div>
+
+    <script src="./bundle.min.js"></script>
+  </body>
+</html>

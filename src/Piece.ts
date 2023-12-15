@@ -1,20 +1,36 @@
-import { uuid } from "uuidv4";
+
 import { Color } from "./misc/colors";
 import { Denomination } from "./misc/denomination";
-import { move } from "./misc/move";
+import { Move } from "./misc/move";
 import { Position } from "./misc/position";
+import ChessService from "./services/ChessService";
 
-export abstract class Piece {
+export default abstract class Piece {
     private _position: Position;
-    private denomination: Denomination
+    private _denomination: Denomination;
+    public get denomination(): Denomination {
+        return this._denomination;
+    }
+    public set denomination(value: Denomination) {
+        this._denomination = value;
+    }
     private status: "dead" | "alive" = "alive"
-    private color: Color
-    public id: string = uuid();
+    private _color: Color;
+
+    public id: string = crypto.randomUUID();
 
     constructor(pos: Position, col: Color, denom: Denomination,) {
         this._position = pos;
-        this.denomination = denom;
-        this.color = col;
+        this._denomination = denom;
+        this._color = col;
+    }
+
+    public getPossibleMoves(service: ChessService): Move[] {
+        return []
+    }
+
+    public get color(): Color {
+        return this._color;
     }
 
     public get position(): Position {

@@ -1,7 +1,7 @@
-import { Piece } from "../Piece"
+import Piece from "../Piece"
 import { Position } from "./position"
 
-export type move = {
+export type Move = {
     position: Position,
     valid: boolean,
     steps?: number
