@@ -42,7 +42,7 @@ class ChessService {
             } else {
                 this._runtimeStore.push(new Bishop({ x: 3, y: 3 }, Color.BLACK));
 
-                this._runtimeStore.push(new Pawn({ x: 0, y: 3 }, Color.BLACK));
+                this._runtimeStore.push(new Pawn({ x: 0, y: 0 }, Color.WHITE));
                 // this.initializeBoard()
             }
         } catch (error) {

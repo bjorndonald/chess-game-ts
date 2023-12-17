@@ -103,7 +103,7 @@ class ChessService {
             }
             else {
                 this._runtimeStore.push(new Bishop_1.default({ x: 3, y: 3 }, colors_1.Color.BLACK));
-                this._runtimeStore.push(new Pawn_1.default({ x: 0, y: 3 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Pawn_1.default({ x: 0, y: 0 }, colors_1.Color.WHITE));
                 // this.initializeBoard()
             }
         }

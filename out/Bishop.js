@@ -62,50 +62,52 @@ class Bishop extends Piece_1.default {
                 }
                 end_x--;
                 end_y++;
+                ////////////////////////////////
+                var position = { x: alt_start_x, y: alt_start_y };
+                var piece = service.presentInSpace(position);
+                if (alt_start_x < 8 && alt_start_y < 8) {
+                    if (!piece) {
+                        moves.push({
+                            position,
+                            valid: true,
+                            steps: alt_start_x - current_x
+                        });
+                    }
+                    else if (!!piece && piece.color !== this.color) {
+                        moves.push({
+                            position,
+                            kill: piece,
+                            valid: true,
+                            steps: alt_start_x - current_x
+                        });
+                        alt_start_x = 8;
+                        alt_start_y = 8;
+                    }
+                    alt_start_x++;
+                    alt_start_y++;
+                }
+                position = { x: alt_end_x, y: alt_end_y };
+                var piece = service.presentInSpace(position);
+                if (!piece && alt_end_x > -1 && alt_end_y > -1) {
+                    moves.push({
+                        position,
+                        valid: true,
+                        steps: alt_end_x - current_x
+                    });
+                }
+                else if (!!piece && piece.color !== this.color) {
+                    moves.push({
+                        position,
+                        kill: piece,
+                        valid: true,
+                        steps: alt_end_x - current_x
+                    });
+                    alt_end_x = -1;
+                    alt_end_y = -1;
+                }
+                alt_end_x--;
+                alt_end_y--;
             }
-            ////////////////////////////////
-            var position = { x: alt_start_x, y: alt_start_y };
-            var piece = service.presentInSpace(position);
-            if (!piece && alt_start_x < 8 && alt_start_y < 8) {
-                moves.push({
-                    position,
-                    valid: true,
-                    steps: alt_start_x - current_x
-                });
-            }
-            else if (!!piece && piece.color !== this.color) {
-                moves.push({
-                    position,
-                    kill: piece,
-                    valid: true,
-                    steps: alt_start_x - current_x
-                });
-                alt_start_x = 8;
-                alt_start_y = 8;
-            }
-            alt_start_x++;
-            alt_start_y++;
-            // position = { x: alt_end_x, y: alt_end_y }
-            // var piece = service.presentInSpace(position)
-            // if()
-            // if (!piece && alt_end_x > -1 && alt_end_y > -1) {
-            //     moves.push({
-            //         position,
-            //         valid: true,
-            //         steps: alt_end_x - current_x
-            //     })
-            // } else if (!!piece && piece.color !== this.color) {
-            //     moves.push({
-            //         position,
-            //         kill: piece,
-            //         valid: true,
-            //         steps: alt_end_x - current_x
-            //     })
-            //     alt_end_x = -1
-            //     alt_end_y = -1
-            // }
-            alt_end_x--;
-            alt_end_y--;
             return moves;
         };
     }
