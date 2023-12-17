@@ -32,36 +32,36 @@ class ChessService {
         };
         this.initializeBoard = () => {
             Array.from({ length: 8 }, (v, k) => {
-                this._runtimeStore.push(new Pawn_1.default({ x: k, y: 1 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Pawn_1.default({ x: k, y: 1 }, colors_1.Color.WHITE));
             });
             Array.from({ length: 8 }, (v, k) => {
-                this._runtimeStore.push(new Pawn_1.default({ x: k, y: 6 }, colors_1.Color.WHITE));
+                this._runtimeStore.push(new Pawn_1.default({ x: k, y: 6 }, colors_1.Color.BLACK));
             });
             const rooks = [0, 7];
             rooks.map((x, i) => {
-                this._runtimeStore.push(new Rook_1.default({ x: x, y: 0 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Rook_1.default({ x: x, y: 0 }, colors_1.Color.WHITE));
             });
             rooks.map((x, i) => {
-                this._runtimeStore.push(new Rook_1.default({ x: x, y: 7 }, colors_1.Color.WHITE));
+                this._runtimeStore.push(new Rook_1.default({ x: x, y: 7 }, colors_1.Color.BLACK));
             });
             const knights = [1, 6];
             knights.map((x, i) => {
-                this._runtimeStore.push(new Knight_1.default({ x: x, y: 0 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Knight_1.default({ x: x, y: 0 }, colors_1.Color.WHITE));
             });
             knights.map((x, i) => {
-                this._runtimeStore.push(new Knight_1.default({ x: x, y: 7 }, colors_1.Color.WHITE));
+                this._runtimeStore.push(new Knight_1.default({ x: x, y: 7 }, colors_1.Color.BLACK));
             });
             const bishops = [2, 5];
             bishops.map((x, i) => {
-                this._runtimeStore.push(new Bishop_1.default({ x: x, y: 0 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Bishop_1.default({ x: x, y: 0 }, colors_1.Color.WHITE));
             });
             bishops.map((x, i) => {
-                this._runtimeStore.push(new Bishop_1.default({ x: x, y: 7 }, colors_1.Color.WHITE));
+                this._runtimeStore.push(new Bishop_1.default({ x: x, y: 7 }, colors_1.Color.BLACK));
             });
-            this._runtimeStore.push(new Queen_1.default({ x: 3, y: 0 }, colors_1.Color.BLACK));
-            this._runtimeStore.push(new Queen_1.default({ x: 3, y: 7 }, colors_1.Color.WHITE));
-            this._runtimeStore.push(new King_1.default({ x: 4, y: 0 }, colors_1.Color.BLACK));
-            this._runtimeStore.push(new King_1.default({ x: 4, y: 7 }, colors_1.Color.WHITE));
+            this._runtimeStore.push(new Queen_1.default({ x: 3, y: 0 }, colors_1.Color.WHITE));
+            this._runtimeStore.push(new Queen_1.default({ x: 3, y: 7 }, colors_1.Color.BLACK));
+            this._runtimeStore.push(new King_1.default({ x: 4, y: 0 }, colors_1.Color.WHITE));
+            this._runtimeStore.push(new King_1.default({ x: 4, y: 7 }, colors_1.Color.BLACK));
             this.saveToStore();
         };
         this.presentInSpace = (pos) => {
@@ -101,8 +101,11 @@ class ChessService {
                         this.runtimeStore.push(new Rook_1.default(x._position, x._color));
                 });
             }
-            else
-                this.initializeBoard();
+            else {
+                this._runtimeStore.push(new Bishop_1.default({ x: 3, y: 3 }, colors_1.Color.BLACK));
+                this._runtimeStore.push(new Pawn_1.default({ x: 0, y: 3 }, colors_1.Color.BLACK));
+                // this.initializeBoard()
+            }
         }
         catch (error) {
             alert("Wahala");

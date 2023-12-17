@@ -39,7 +39,12 @@ class ChessService {
                     if (x._denomination === Denomination.KING)
                         this.runtimeStore.push(new Rook(x._position, x._color))
                 })
-            } else this.initializeBoard()
+            } else {
+                this._runtimeStore.push(new Bishop({ x: 3, y: 3 }, Color.BLACK));
+
+                this._runtimeStore.push(new Pawn({ x: 0, y: 3 }, Color.BLACK));
+                // this.initializeBoard()
+            }
         } catch (error) {
             alert("Wahala")
         }
@@ -69,41 +74,41 @@ class ChessService {
     initializeBoard = () => {
         Array.from({ length: 8 },
             (v, k) => {
-                this._runtimeStore.push(new Pawn({ x: k, y: 1 }, Color.BLACK))
+                this._runtimeStore.push(new Pawn({ x: k, y: 1 }, Color.WHITE))
             })
         Array.from({ length: 8 },
             (v, k) => {
-                this._runtimeStore.push(new Pawn({ x: k, y: 6 }, Color.WHITE))
+                this._runtimeStore.push(new Pawn({ x: k, y: 6 }, Color.BLACK))
             })
         const rooks = [0, 7];
         rooks.map((x, i) => {
-            this._runtimeStore.push(new Rook({ x: x, y: 0 }, Color.BLACK));
+            this._runtimeStore.push(new Rook({ x: x, y: 0 }, Color.WHITE));
         })
         rooks.map((x, i) => {
-            this._runtimeStore.push(new Rook({ x: x, y: 7 }, Color.WHITE));
+            this._runtimeStore.push(new Rook({ x: x, y: 7 }, Color.BLACK));
         })
 
         const knights = [1, 6];
         knights.map((x, i) => {
-            this._runtimeStore.push(new Knight({ x: x, y: 0 }, Color.BLACK));
+            this._runtimeStore.push(new Knight({ x: x, y: 0 }, Color.WHITE));
         })
         knights.map((x, i) => {
-            this._runtimeStore.push(new Knight({ x: x, y: 7 }, Color.WHITE));
+            this._runtimeStore.push(new Knight({ x: x, y: 7 }, Color.BLACK));
         })
 
         const bishops = [2, 5];
         bishops.map((x, i) => {
-            this._runtimeStore.push(new Bishop({ x: x, y: 0 }, Color.BLACK));
+            this._runtimeStore.push(new Bishop({ x: x, y: 0 }, Color.WHITE));
         })
         bishops.map((x, i) => {
-            this._runtimeStore.push(new Bishop({ x: x, y: 7 }, Color.WHITE));
+            this._runtimeStore.push(new Bishop({ x: x, y: 7 }, Color.BLACK));
         })
 
-        this._runtimeStore.push(new Queen({ x: 3, y: 0 }, Color.BLACK));
-        this._runtimeStore.push(new Queen({ x: 3, y: 7 }, Color.WHITE));
+        this._runtimeStore.push(new Queen({ x: 3, y: 0 }, Color.WHITE));
+        this._runtimeStore.push(new Queen({ x: 3, y: 7 }, Color.BLACK));
 
-        this._runtimeStore.push(new King({ x: 4, y: 0 }, Color.BLACK));
-        this._runtimeStore.push(new King({ x: 4, y: 7 }, Color.WHITE));
+        this._runtimeStore.push(new King({ x: 4, y: 0 }, Color.WHITE));
+        this._runtimeStore.push(new King({ x: 4, y: 7 }, Color.BLACK));
         this.saveToStore()
     }
 
