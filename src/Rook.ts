@@ -13,6 +13,7 @@ export default class Rook extends Piece {
     override getPossibleMoves = (service: ChessService) => {
         let moves: Move[] = []
         const { x: current_x, y: current_y } = this.position;
+
         var start = current_x - 1, end = 7 - current_x;
 
         while (start > 0 || end < 8) {

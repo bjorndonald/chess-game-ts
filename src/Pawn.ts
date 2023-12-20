@@ -14,9 +14,9 @@ export default class Pawn extends Piece {
     override getPossibleMoves = (service: ChessService) => {
         var result: Move[] = []
         var { x, y } = this.position;
-        if (this.color === Color.WHITE && y == 0) return [];
-        if (this.color === Color.BLACK && y == 7) return [];
-        var new_y = this.color === Color.WHITE ? y - 1 : y + 1
+        if (this.color === Color.BLACK && y == 0) return [];
+        if (this.color === Color.WHITE && y == 7) return [];
+        var new_y = this.color === Color.BLACK ? y - 1 : y + 1
         // First possible move
         var piece = service.presentInSpace({ x, y: new_y })
         result.push({
@@ -24,6 +24,15 @@ export default class Pawn extends Piece {
             valid: !piece,
             steps: 1,
         })
+
+        if ((this.color === Color.BLACK && this.position.y === 6) || (this.color === Color.WHITE && this.position.y === 1)) {
+            var piece = service.presentInSpace({ x, y: this.color === Color.BLACK ? new_y - 1 : new_y + 1 })
+            result.push({
+                position: { x, y: new_y + 1 },
+                valid: !piece,
+                steps: 2,
+            })
+        }
 
         // Second possible move
         if (x != 0) {

@@ -11,7 +11,13 @@ import Piece from "../Piece";
 import Queen from "../Queen";
 import Rook from "../Rook";
 
+export const isSamePosition = (a: Position, b: Position) => {
+    return a.x === b.x && a.y === b.y
+}
+
 class ChessService {
+    private _turn = Color.WHITE;
+    gameOn = true;
     private _runtimeStore: Piece[] = [];
 
     constructor() {
@@ -35,15 +41,15 @@ class ChessService {
                     if (x._denomination === Denomination.ROOK)
                         this.runtimeStore.push(new Rook(x._position, x._color))
                     if (x._denomination === Denomination.QUEEN)
-                        this.runtimeStore.push(new Rook(x._position, x._color))
+                        this.runtimeStore.push(new Queen(x._position, x._color))
                     if (x._denomination === Denomination.KING)
-                        this.runtimeStore.push(new Rook(x._position, x._color))
+                        this.runtimeStore.push(new King(x._position, x._color))
                 })
             } else {
-                this._runtimeStore.push(new King({ x: 3, y: 3 }, Color.BLACK));
+                // this._runtimeStore.push(new King({ x: 3, y: 3 }, Color.BLACK));
 
-                this._runtimeStore.push(new Pawn({ x: 0, y: 0 }, Color.WHITE));
-                // this.initializeBoard()
+                // this._runtimeStore.push(new Pawn({ x: 0, y: 0 }, Color.WHITE));
+                this.initializeBoard()
             }
         } catch (error) {
             alert("Wahala")
@@ -131,6 +137,8 @@ class ChessService {
         if (!move.valid) return;
         const pieceIndex = this.runtimeStore.findIndex(x => x.id === piece.id)
         this.runtimeStore[pieceIndex].position = move.position;
+
+        this.saveToStore()
     }
 
     killPiece = (id: string) => {
@@ -138,6 +146,69 @@ class ChessService {
         this.runtimeStore[pieceIndex].kill();
         this.saveToStore()
     }
+
+    public get turn() {
+        return this._turn;
+    }
+
+    public nextTurn() {
+        this._turn = this._turn === Color.WHITE ? Color.BLACK : Color.WHITE;
+    }
+
+    possibleCheck = (piece: Piece): Move[] => {
+        const moves = piece.getPossibleMoves(this)
+        if (moves.some(x => x.kill?.denomination === Denomination.KING)) {
+            const killers = this.runtimeStore.filter(x => x.color === this.alt(piece.color))
+            const king = this.runtimeStore.find(x => x.color === this.alt(piece.color) && x.denomination === Denomination.KING)
+            var kingMoves = king ? king.getPossibleMoves(this) : []
+            const count = kingMoves.length
+            for (const move of kingMoves) {
+                for (const killer of killers) {
+                    if (killer.getPossibleMoves(this).some(x => isSamePosition(move.position, x.position))) {
+                        kingMoves = kingMoves.filter(x => !isSamePosition(x.position, move.position))
+                    }
+                }
+            }
+            if (kingMoves.length === 0) {
+                this.gameOn = false;
+                alert("Checkmate" + piece.color + " is the winner ");
+                return []
+            }
+
+            return kingMoves
+        }
+        return []
+    }
+
+    _possibleCheckMate = (color: Color) => {
+        // for white
+        const killers = this.runtimeStore.filter(x => x.color === this.alt(color))
+        const king = this.runtimeStore.find(x => x.color === color && x.denomination === Denomination.KING)
+        var kingMoves = king ? king.getPossibleMoves(this) : []
+        const count = kingMoves.length
+        for (const move of kingMoves) {
+            for (const killer of killers) {
+                if (killer.getPossibleMoves(this).some(x => isSamePosition(move.position, x.position))) {
+                    kingMoves = kingMoves.filter(x => !isSamePosition(x.position, move.position))
+                }
+            }
+        }
+
+        if (kingMoves.length === 0) {
+            alert("Checkmate")
+            return []
+        }
+        if (kingMoves.length !== count) {
+            alert("Check")
+            return kingMoves
+        }
+
+        return false
+    }
+
+    private alt = (color: Color) => color === Color.WHITE ? Color.BLACK : Color.WHITE
+
+
 }
 
 export default ChessService

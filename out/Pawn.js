@@ -11,11 +11,11 @@ class Pawn extends Piece_1.default {
         this.getPossibleMoves = (service) => {
             var result = [];
             var { x, y } = this.position;
-            if (this.color === colors_1.Color.WHITE && y == 0)
+            if (this.color === colors_1.Color.BLACK && y == 0)
                 return [];
-            if (this.color === colors_1.Color.BLACK && y == 7)
+            if (this.color === colors_1.Color.WHITE && y == 7)
                 return [];
-            var new_y = this.color === colors_1.Color.WHITE ? y - 1 : y + 1;
+            var new_y = this.color === colors_1.Color.BLACK ? y - 1 : y + 1;
             // First possible move
             var piece = service.presentInSpace({ x, y: new_y });
             result.push({
@@ -23,6 +23,14 @@ class Pawn extends Piece_1.default {
                 valid: !piece,
                 steps: 1,
             });
+            if ((this.color === colors_1.Color.BLACK && this.position.y === 6) || (this.color === colors_1.Color.WHITE && this.position.y === 1)) {
+                var piece = service.presentInSpace({ x, y: this.color === colors_1.Color.BLACK ? new_y - 1 : new_y + 1 });
+                result.push({
+                    position: { x, y: new_y + 1 },
+                    valid: !piece,
+                    steps: 2,
+                });
+            }
             // Second possible move
             if (x != 0) {
                 var piece = service.presentInSpace({ x: x - 1, y: new_y });
