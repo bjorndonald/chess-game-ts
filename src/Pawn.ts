@@ -26,9 +26,10 @@ export default class Pawn extends Piece {
         })
 
         if ((this.color === Color.BLACK && this.position.y === 6) || (this.color === Color.WHITE && this.position.y === 1)) {
-            var piece = service.presentInSpace({ x, y: this.color === Color.BLACK ? new_y - 1 : new_y + 1 })
+            var ex_y = this.color === Color.BLACK ? y - 2 : y + 2
+            var piece = service.presentInSpace({ x, y: ex_y })
             result.push({
-                position: { x, y: new_y + 1 },
+                position: { x, y: ex_y },
                 valid: !piece,
                 steps: 2,
             })

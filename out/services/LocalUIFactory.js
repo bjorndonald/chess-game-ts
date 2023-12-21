@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphics_1 = __importDefault(require("../graphics"));
 const colors_1 = require("../misc/colors");
-const ChessService_1 = require("./ChessService");
 function range(size, startAt = 0) {
     return [...Array(size).keys()].map(i => i + startAt);
 }
@@ -56,19 +55,21 @@ class LocalUIFactory {
             return div;
         };
         this.movePiece = (pos, ev) => {
+            if (!this.service.gameOn)
+                return;
             const currentPiece = this.currentPiece;
             if (currentPiece == null)
                 return;
-            if (this.restrictedKingMoves.length && currentPiece.denomination !== "King" /* Denomination.KING */) {
-                return;
-            }
+            // if (this.restrictedKingMoves.length && currentPiece.denomination !== Denomination.KING) {
+            //     return
+            // }
             const moves = currentPiece.getPossibleMoves(this.service);
             const move = moves.find(x => x.position.x === pos.x && x.position.y === pos.y);
             if (!move)
                 return;
-            if (this.restrictedKingMoves.length &&
-                !this.restrictedKingMoves.some(x => (0, ChessService_1.isSamePosition)(x.position, pos)))
-                return;
+            // if (this.restrictedKingMoves.length &&
+            //     !this.restrictedKingMoves.some(x => isSamePosition(x.position, pos)))
+            //     return
             ev.stopPropagation();
             if (!!move.kill) {
                 this.killPiece(move.kill);
@@ -156,10 +157,12 @@ class LocalUIFactory {
         };
         this.togglePossibleMoves = (ev) => {
             var _a, _b;
+            if (!this.service.gameOn)
+                return;
             const elem = ev === null || ev === void 0 ? void 0 : ev.target;
             const piece = this.service.getPieceById(elem.id);
             if ((piece === null || piece === void 0 ? void 0 : piece.color) !== this.service.turn) {
-                ev.stopPropagation();
+                // ev.stopPropagation()
                 return;
             }
             if (((_a = this.currentPiece) === null || _a === void 0 ? void 0 : _a.id) === (piece === null || piece === void 0 ? void 0 : piece.id)) {

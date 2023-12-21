@@ -73,18 +73,20 @@ class LocalUIFactory {
     }
 
     movePiece = (pos: Position, ev: Event) => {
+        if (!this.service.gameOn) return;
         const currentPiece = this.currentPiece!
         if (currentPiece == null) return;
-        if (this.restrictedKingMoves.length && currentPiece.denomination !== Denomination.KING) {
-            return
-        }
+        // if (this.restrictedKingMoves.length && currentPiece.denomination !== Denomination.KING) {
+        //     return
+        // }
 
         const moves = currentPiece.getPossibleMoves(this.service)
         const move = moves.find(x => x.position.x === pos.x && x.position.y === pos.y)
+
         if (!move) return;
-        if (this.restrictedKingMoves.length &&
-            !this.restrictedKingMoves.some(x => isSamePosition(x.position, pos)))
-            return
+        // if (this.restrictedKingMoves.length &&
+        //     !this.restrictedKingMoves.some(x => isSamePosition(x.position, pos)))
+        //     return
 
         ev.stopPropagation()
 
@@ -182,10 +184,11 @@ class LocalUIFactory {
     }
 
     togglePossibleMoves = (ev: MouseEvent) => {
+        if (!this.service.gameOn) return;
         const elem = ev?.target as Element
         const piece = this.service.getPieceById(elem.id)
         if (piece?.color !== this.service.turn) {
-            ev.stopPropagation()
+            // ev.stopPropagation()
             return;
         }
         if (this.currentPiece?.id === piece?.id) {
